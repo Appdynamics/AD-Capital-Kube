@@ -1,6 +1,6 @@
 ## Kubernetes and AppD
 
-For a detailed tutorial on how to install and configure this application for a Kubernetes cluster navigate to the [walkthrough](https://github.com/Appdynamics/AD-Capital-Kube/blob/master/Kubernetes-Walkthrough/1.md).
+For a detailed tutorial on how to install and configure this application for a Kubernetes cluster navigate to the [walkthrough](https://github.com/Appdynamics/AD-Capital-Kube/blob/master/KubernetesWalkthrough/1.md).
 
 
 ## Our Story
