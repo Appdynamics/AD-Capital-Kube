@@ -1,4 +1,4 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: rest
@@ -11,6 +11,9 @@ spec:
   # replicas: 2
   # strategy:
   #   type: Recreate
+  selector:
+    matchLabels:
+      app: rest
   template:
     metadata:
       name: rest
@@ -56,7 +59,6 @@ spec:
         name: rest
         ports:
         - containerPort: 8080
-        resources: {}
         volumeMounts:
         - mountPath: /hostroot
           name: hostroot
@@ -85,7 +87,6 @@ spec:
           volumeMounts:
           - mountPath: /project
             name: project
-status: {}
 
 ---
 
@@ -97,10 +98,7 @@ metadata:
   name: rest
 spec:
   ports:
-  - name: "8080"
+  - name: "http-rest"
     port: 8080
-    targetPort: 8080
   selector:
     app: rest
-status:
-  loadBalancer: {}

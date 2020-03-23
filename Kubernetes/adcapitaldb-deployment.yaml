@@ -1,4 +1,4 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
@@ -6,7 +6,9 @@ metadata:
   name: adcapitaldb
 spec:
   replicas: 1
-  strategy: {}
+  selector:
+    matchLabels:
+      app: adcapitaldb
   template:
     metadata:
       labels:
@@ -20,9 +22,7 @@ spec:
         name: adcapitaldb
         ports:
         - containerPort: 3306
-        resources: {}
       restartPolicy: Always
-status: {}
 
 ---
 
@@ -34,10 +34,7 @@ metadata:
   name: adcapitaldb
 spec:
   ports:
-  - name: "3306"
+  - name: "mysql-adcapitaldb"
     port: 3306
-    targetPort: 3306
   selector:
     app: adcapitaldb
-status:
-  loadBalancer: {}

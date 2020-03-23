@@ -1,4 +1,4 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: portal
@@ -11,6 +11,9 @@ spec:
   replicas: 1
   strategy:
     type: Recreate
+  selector:
+    matchLabels:
+      app: portal
   template:
     metadata:
       name: portal
@@ -82,7 +85,6 @@ spec:
           volumeMounts:
           - mountPath: /project
             name: project
-status: {}
 
 ---
 
@@ -94,10 +96,7 @@ metadata:
   name: portal
 spec:
   ports:
-  - name: "8080"
+  - name: "http-portal"
     port: 8080
-    targetPort: 8080
   selector:
     app: portal
-status:
-  loadBalancer: {}

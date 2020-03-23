@@ -1,4 +1,4 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: approval
@@ -9,6 +9,9 @@ metadata:
     keel.sh/trigger: poll
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app: approval
   strategy:
     type: Recreate
   template:
@@ -53,7 +56,6 @@ spec:
         name: approval
         ports:
         - containerPort: 8080
-        resources: {}
         volumeMounts:
         - mountPath: /hostroot
           name: hostroot
@@ -82,7 +84,6 @@ spec:
           volumeMounts:
           - mountPath: /project
             name: project
-status: {}
 
 ---
 
@@ -94,10 +95,7 @@ metadata:
   name: approval
 spec:
   ports:
-  - name: "8080"
+  - name: "http-approval"
     port: 8080
-    targetPort: 8080
   selector:
     app: approval
-status:
-  loadBalancer: {}

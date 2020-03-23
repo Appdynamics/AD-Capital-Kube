@@ -1,4 +1,4 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
@@ -6,7 +6,9 @@ metadata:
   name: rabbitmq
 spec:
   replicas: 1
-  strategy: {}
+  selector:
+    matchLabels:
+      app: rabbitmq
   template:
     metadata:
       labels:
@@ -22,9 +24,7 @@ spec:
         name: rabbitmq
         ports:
         - containerPort: 5672
-        resources: {}
       restartPolicy: Always
-status: {}
 
 ---
 
@@ -36,10 +36,7 @@ metadata:
   name: rabbitmq
 spec:
   ports:
-  - name: "5672"
+  - name: "tcp-rabbitmq"
     port: 5672
-    targetPort: 5672
   selector:
     app: rabbitmq
-status:
-  loadBalancer: {}
